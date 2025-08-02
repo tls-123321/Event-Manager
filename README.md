@@ -7,6 +7,15 @@ A full-stack event management application with a Django REST API backend and a R
 - Node.js (v18+ recommended)
 - npm
 
+
+# Client requirements
+See client_requirements.txt for a list of frontend dependencies. To install client dependencies, run:
+
+cd client
+npm install
+
+
+
 ## Backend Setup (Django)
 
 1. **Clone the repository**
@@ -19,10 +28,14 @@ A full-stack event management application with a Django REST API backend and a R
    python -m venv env
    env\Scripts\activate
    ```
+   
 3. **Install dependencies**
    ```sh
    pip install -r requirements.txt
    ```
+   cd client
+   npm install
+
 4. **Apply migrations**
    ```sh
    cd eventManager
