@@ -33,8 +33,7 @@ npm install
    ```sh
    pip install -r requirements.txt
    ```
-   cd client
-   npm install
+
 
 4. **Apply migrations**
    ```sh
