@@ -61,6 +61,9 @@ npm install
    ```sh
    npm install
    ```
+   ```sh
+   npm install react-router-dom
+   ```
 3. **Run the frontend development server**
    ```sh
    npm run dev
