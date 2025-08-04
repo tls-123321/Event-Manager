@@ -14,7 +14,7 @@ A full-stack event management application with a Django REST API backend and a R
 
 ## Prerequisites
 - Python 3.12+
-- Node.js (v18+ recommended)
+- Node.js
 - npm
 
 
