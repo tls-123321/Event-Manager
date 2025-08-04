@@ -1,5 +1,5 @@
 from .models import User, Event, Booking
-from .serializers import EventSerializer, UserSerializer, BookingSerializer, RegisterSerializer, ProfileUpdateSerializer, BookingCreateSerializer, BookingDetailSerializer, BookingCancelSerializer
+from .serializers import EventSerializer, UserSerializer, BookingSerializer, RegisterSerializer, BookingCreateSerializer, BookingDetailSerializer, BookingCancelSerializer
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -33,22 +33,6 @@ class CurrentUserView(generics.RetrieveAPIView):
     def get_object(self): 
         return self.request.user
 
-class ProfileUpdateView(generics.UpdateAPIView):
-    serializer_class = ProfileUpdateSerializer
-    permission_classes = [IsAuthenticated]
-    parser_classes = [JSONParser]
-    
-    def get_object(self):
-        return self.request.user
-    
-    def update(self, request, *args, **kwargs):
-        try:
-            return super().update(request, *args, **kwargs)
-        except Exception as e:
-            return Response(
-                {'error': str(e)},
-                status=status.HTTP_400_BAD_REQUEST
-            )
 
 class UserBookingsView(generics.ListAPIView):
     serializer_class = BookingSerializer

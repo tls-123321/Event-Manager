@@ -23,40 +23,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email']
 
-class ProfileUpdateSerializer(serializers.ModelSerializer):
-    current_password = serializers.CharField(write_only=True, required=False)
-    new_password = serializers.CharField(write_only=True, required=False)
-    
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'current_password', 'new_password']
-        extra_kwargs = {
-            'username': {'required': False},
-            'email': {'required': False}
-        }
-    
-    def validate(self, attrs):
-        if attrs.get('new_password') and not attrs.get('current_password'):
-            raise serializers.ValidationError("Current password is required to change password")
-        
-        if 'email' in attrs and attrs['email'] != self.instance.email:
-            if User.objects.filter(email=attrs['email']).exists():
-                raise serializers.ValidationError("Email is already taken")
-        
-        return attrs
-    
-    def update(self, instance, validated_data):
-        if validated_data.get('new_password'):
-            if not instance.check_password(validated_data['current_password']):
-                raise serializers.ValidationError("Current password is incorrect")
-            instance.set_password(validated_data['new_password'])
-        
-        for attr, value in validated_data.items():
-            if attr not in ['current_password', 'new_password']:
-                setattr(instance, attr, value)
-        
-        instance.save()
-        return instance
 
 class BookingSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):

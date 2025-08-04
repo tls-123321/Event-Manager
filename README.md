@@ -9,6 +9,7 @@ A full-stack event management application with a Django REST API backend and a R
 - Users need to create account to be able to create bookings. 
 - After creating booking codes are automatically generated and stored then displayed on user's profile page alongside event's name and status.
 - For booking management you can write code on events page in the field of desired event.
+- You can navigate through pages by navbar
 
 
 ## Prerequisites
