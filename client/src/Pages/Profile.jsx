@@ -50,7 +50,6 @@ export default function Profile({ onAuthChange }) {
 
   return (
     <div>
-      <button onClick={() => navigate('/')}>← Back to Events</button>
       <h1>Profile</h1>
 
       <div>
@@ -59,6 +58,9 @@ export default function Profile({ onAuthChange }) {
         <p>Email: {user?.email}</p>
         <button onClick={handleLogout}>Logout</button>
       </div>
+      
+      <br></br>
+      <hr></hr>
 
       <div>
         <h2>My Bookings</h2>
@@ -71,7 +73,15 @@ export default function Profile({ onAuthChange }) {
           <div>
             {bookings.map(booking => (
               <div key={booking.code}>
-                <p>{booking.event_title} - Code: {booking.code}</p>
+                <p>
+                  {booking.event_title} - Code: {booking.code}
+                  {booking.status === 'Canceled' && (
+                    <span style={{ color: 'red', marginLeft: 8 }}>[Canceled]</span>
+                  )}
+                  {booking.status === 'Expired' && (
+                    <span style={{ color: 'gray', marginLeft: 8 }}>[Expired]</span>
+                  )}
+                </p>
               </div>
             ))}
           </div>

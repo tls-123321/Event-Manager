@@ -7,6 +7,23 @@ function formatDate(date) {
   return isNaN(d) ? '' : d.toLocaleDateString();
 }
 
+function EventCard({ event, ...props }) {
+  const [imgError, setImgError] = useState(false);
+  const thumbnailSrc = !imgError && event.thumbnail_url ? event.thumbnail_url : '/media/nothumbnail.jpeg';
+  return (
+    <div style={{ border: '1px solid #ccc', borderRadius: 6, margin: '1rem 0', padding: 16, display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+      <img
+        src={thumbnailSrc}
+        style={{ width: 220, height: 180, objectFit: 'cover', borderRadius: 4, border: '1px solid #eee' }}
+        onError={() => setImgError(true)}
+      />
+      <div style={{ flex: 1 }}>
+        {props.children}
+      </div>
+    </div>
+  );
+}
+
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState('');
@@ -89,12 +106,10 @@ export default function Events() {
       ) : (
         <div>
           {filtered.map(event => (
-            <div key={event.id} style={{ border: '1px solid #ccc', borderRadius: 6, margin: '1rem 0', padding: 16 }}>
+            <EventCard key={event.id} event={event}>
               <div style={{ fontWeight: 'bold', fontSize: 20 }}>{event.title}</div>
               <div>{event.description}</div>
               <div>Date: {formatDate(event.startDate)} - {formatDate(event.endDate)}</div>
-              {event.location && <div>Location: {event.location}</div>}
-              {event.capacity && <div>Capacity: {event.capacity}</div>}
               {auth.isAuthenticated() && (
                 <div style={{ marginTop: 12 }}>
                   <button onClick={() => handleBooking(event.id)} disabled={bookingLoading[event.id]}>
@@ -131,7 +146,7 @@ export default function Events() {
                   )}
                 </div>
               )}
-            </div>
+            </EventCard>
           ))}
         </div>
       )}

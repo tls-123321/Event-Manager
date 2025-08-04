@@ -56,7 +56,7 @@ export default function Login({ onAuthChange }) {
         </button>
       </form>
       <p style={{ marginTop: '1rem' }}>
-        Don't have an account? <Link to="/register">Register</Link>
+        Don't have an account? <Link  to="/register" style={{color:'blue' }}>Register </Link>
       </p>
     </div>
   );

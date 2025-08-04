@@ -95,10 +95,6 @@ class CancelBookingView(generics.UpdateAPIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-class BookingListView(generics.ListAPIView):
-    queryset = Booking.objects.all()
-    serializer_class = BookingSerializer
-
 
 class EventDetailsView(generics.RetrieveAPIView):
     queryset = Event.objects.all()

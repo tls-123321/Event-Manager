@@ -97,9 +97,14 @@ class Booking(models.Model):
         return f"Booking {self.code} for {self.event.title}"
 
     def save(self, *args, **kwargs):
+        if self._state.adding and self.event.is_past:
+            raise ValueError("Cannot create a booking for an event that has already finished.")
+        if self.event.is_past and self.status == Status.ACTIVE:
+            self.status = Status.EXPIRED
         if not self.code:
             self.code = generate_booking_code()
         super().save(*args, **kwargs)
+
 
     def can_cancel(self):
         if self.status != Status.ACTIVE:

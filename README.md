@@ -2,6 +2,15 @@
 
 A full-stack event management application with a Django REST API backend and a React (Vite) frontend.
 
+## How It Works
+
+- Firstly database should be created and connected using .env.
+- Events can be added from admin page
+- Users need to create account to be able to create bookings. 
+- After creating booking codes are automatically generated and stored then displayed on user's profile page alongside event's name and status.
+- For booking management you can write code on events page in the field of desired event.
+
+
 ## Prerequisites
 - Python 3.12+
 - Node.js (v18+ recommended)
@@ -64,6 +73,5 @@ A full-stack event management application with a Django REST API backend and a R
    The frontend will be available at `http://localhost:5173/`
 
 ## Environment Variables
-- Backend: Configure environment variables in a `.env` file according to `.env.sample` in the `eventManager` directory as needed for Database
-- Frontend: If needed, add environment variables in `client/.env`.
+- Backend: Configure environment variables in a `.env` file according to `.env.sample` in the `eventManager` directory as needed for Database.
 

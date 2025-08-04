@@ -12,10 +12,11 @@ class EventSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if obj.thumbnail:
             url = obj.thumbnail.url
-            if request is not None:
-                return request.build_absolute_uri(url)
-            return url
-        return None
+        else:
+            url = '/media/nothumbnail.jpeg'
+        if request is not None:
+            return request.build_absolute_uri(url)
+        return url
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -58,6 +59,11 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 class BookingSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        if instance.event.is_past and instance.status == Status.ACTIVE:
+            instance.status = Status.EXPIRED
+            instance.save(update_fields=["status"])
+        return super().to_representation(instance)
     event_title = serializers.CharField(source='event.title', read_only=True)
     event_start_date = serializers.DateTimeField(source='event.startDate', read_only=True)
     event_end_date = serializers.DateTimeField(source='event.endDate', read_only=True)
