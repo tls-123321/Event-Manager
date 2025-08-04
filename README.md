@@ -32,10 +32,14 @@ A full-stack event management application with a Django REST API backend and a R
    ```
    
 3. **Install dependencies** 
-   cd Event-Manager
    ```sh
+   cd Event-Manager
    pip install -r requirements.txt
    ```
+
+## Environment Variables
+- Create and connect database
+- Configure environment variables in a `.env` file according to `.env.sample` in the `eventManager` directory.
 
 4. **Apply migrations**
    ```sh
@@ -72,6 +76,5 @@ A full-stack event management application with a Django REST API backend and a R
    ```
    The frontend will be available at `http://localhost:5173/`
 
-## Environment Variables
-- Backend: Configure environment variables in a `.env` file according to `.env.sample` in the `eventManager` directory as needed for Database.
+
 
